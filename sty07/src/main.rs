@@ -1,19 +1,35 @@
 fn main() {
     println!("切片类型，他是一种引用，并无所有权");
 
-    let v = vec![1, 2, 3, 4, 5];
+    // let v = vec![1, 2, 3, 4, 5];
 
-    v.iter().for_each(|x| println!("{x}"));
-    // or
-    for x in &v {
-        println!("{x}");
-    }
-    v.iter().for_each(|x| println!("{x}"));
+    // v.iter().for_each(|x| println!("{x}"));
+    // // or
+    // for x in &v {
+    //     println!("{x}");
+    // }
+    // v.iter().for_each(|x| println!("{x}"));
 
-    let s = "hello";
-    {
-        let s = "hello";
-    }
+    // let s = "hello";
+    // {
+    //     let s = "hello";
+    // }
+
+    //------------------------
+
+    // let s = String::from("hello world ye ~");
+    // let len = s.len();
+    // let slice = &s[0..len];
+    // println!("{}",slice);
+    // let slice = &s[..];
+    // println!("{}",slice);
+
+    // let str = first_word_perfect(&s);
+    // println!("{}",str);
+
+    let a = [1, 2, 3, 4, 5];
+    let slice = &a[1..3];
+    println!("this is list {:?}",slice);
 }
 
 /**
@@ -30,4 +46,17 @@ fn first_word(s: &String) -> usize {
     }
 
     s.len()
+}
+
+fn first_word_perfect(s: &String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (index, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..index];
+        }
+    }
+
+    // 如果都没匹配上 则返回整个字符串
+    &s[..]
 }
